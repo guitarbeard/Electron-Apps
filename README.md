@@ -2,4 +2,4 @@
 
 Some examples of Electron Apps
 
-- [#photobombth](/tree/master/electron-photobombth)
+- [#photobombth](https://github.com/guitarbeard/Electron-Apps/tree/master/electron-photobombth)
