@@ -1,11 +1,17 @@
-navigator.getUserMedia = navigator.webkitGetUserMedia
+const countdown = require('./countdown')
+const video = require('./video')
 
-function handleSuccess(videoEl, stream) {
-  videoEl.src = window.URL.createObjectURL(stream)
-}
-
-function handleError(error) {
-  console.log('Camer error: ', error);
+function formatImgTag(doc, bytes) {
+  const div = doc.createElement('div')
+  div.classList.add('photo')
+  const close = doc.createElement('div')
+  close.classList.add('photoClose')
+  const img = new Image()
+  img.classList.add('photoImg')
+  img.src = bytes
+  div.appendChild(img)
+  div.appendChild(close)
+  return div
 }
 
 window.addEventListener('DOMContentLoaded', _ => {
@@ -15,16 +21,14 @@ window.addEventListener('DOMContentLoaded', _ => {
   const photosEl = document.querySelector('.photosContainer')
   const counterEl = document.getElementById('counter')
 
-  const constraints = {
-    audio: false,
-    video: {
-      mandatory: {
-        minWidth: 853,
-        minHeight: 480,
-        maxWidth: 853,
-        maxHeight: 480
-      }
-    }
-  }
-  navigator.getUserMedia(constraints, stream => handleSuccess(videoEl, stream), handleError)
+  const ctx = canvasEl.getContext('2d');
+
+  video.init(navigator, videoEl)
+
+  recordEl.addEventListener('click', _ => {
+    countdown.start(counterEl, 3, _ => {
+      const bytes = video.captureBytes(videoEl, ctx, canvasEl)
+      photos.appendChild(formatImgTag(document, bytes))
+    })
+  })
 })
