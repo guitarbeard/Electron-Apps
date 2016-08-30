@@ -1,5 +1,11 @@
+const electron = require('electron')
+
 const countdown = require('./countdown')
 const video = require('./video')
+
+const { ipcRenderer: ipc, shell, remote } = electron
+
+const images = remote.require('./images')
 
 function formatImgTag(doc, bytes) {
   const div = doc.createElement('div')
@@ -28,7 +34,15 @@ window.addEventListener('DOMContentLoaded', _ => {
   recordEl.addEventListener('click', _ => {
     countdown.start(counterEl, 3, _ => {
       const bytes = video.captureBytes(videoEl, ctx, canvasEl)
-      photos.appendChild(formatImgTag(document, bytes))
+      ipc.send('image-captured', bytes)
+      photosEl.appendChild(formatImgTag(document, bytes))
     })
+  })
+
+  photosEl.addEventListener('click', evt => {
+    const photos = Array.from(document.querySelectorAll('.photoImg'))
+    const index = photos.findIndex(el => el == evt.target)
+
+    shell.showItemInFolder(images.getFromCache(index))
   })
 })
