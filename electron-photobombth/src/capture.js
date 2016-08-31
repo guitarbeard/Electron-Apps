@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', _ => {
   seriously = new Seriously()
   videoSrc = seriously.source('#video')
   canvasTarget = seriously.target('#canvas')
-  effects.choose(seriously, videoSrc, canvasTarget, 'ascii')
+  effects.choose(seriously, videoSrc, canvasTarget)
 
   video.init(navigator, videoEl)
 
@@ -67,4 +67,12 @@ window.addEventListener('DOMContentLoaded', _ => {
 
 ipc.on('image-removed', (evt, index) => {
   document.getElementById('photos').removeChild(Array.from(document.querySelectorAll('.photo'))[index])
+})
+
+ipc.on('effect-choose', (evt, effectName) => {
+  effects.choose(seriously, videoSrc, canvasTarget, effectName)
+})
+
+ipc.on('effect-cycle', evt => {
+  effects.cycle(seriously, videoSrc, canvasTarget)
 })

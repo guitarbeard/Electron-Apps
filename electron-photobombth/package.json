@@ -1,7 +1,8 @@
 {
-  "name": "electron-photobombth",
+  "name": "octothorpe-photobombth",
+  "productName": "#photobombth",
   "version": "1.0.0",
-  "description": "",
+  "description": "Photobooth app with filters",
   "main": "src/main.js",
   "scripts": {
     "start": "electron ."
