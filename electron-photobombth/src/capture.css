@@ -96,10 +96,10 @@ body {
   border-radius: 50%;
   text-align: center;
 }
-.photoClose:hover {
+.photo:hover {
   border: 5px solid rgba(31, 221, 209, 0.6);
 }
-.photoClose:hover .photoClose {
+.photo:hover .photoClose {
   display: block;
 }
 .photoClose:hover:after {
