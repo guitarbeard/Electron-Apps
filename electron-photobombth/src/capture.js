@@ -40,9 +40,20 @@ window.addEventListener('DOMContentLoaded', _ => {
   })
 
   photosEl.addEventListener('click', evt => {
-    const photos = Array.from(document.querySelectorAll('.photoImg'))
+    const isRm = evt.target.classList.contains('photoClose')
+    const selector = isRm ? '.photoClose' : '.photoImg'
+    const photos = Array.from(document.querySelectorAll(selector))
     const index = photos.findIndex(el => el == evt.target)
 
-    shell.showItemInFolder(images.getFromCache(index))
+    if(index > -1) {
+      if(isRm)
+        ipc.send('image-remove', index)
+      else
+        shell.showItemInFolder(images.getFromCache(index))
+    }
   })
+})
+
+ipc.on('image-removed', (evt, index) => {
+  document.getElementById('photos').removeChild(Array.from(document.querySelectorAll('.photo'))[index])
 })

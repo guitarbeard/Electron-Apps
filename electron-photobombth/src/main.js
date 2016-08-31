@@ -29,3 +29,9 @@ ipc.on('image-captured', (evt, contents) => {
     images.cache(imgPath)
   })
 })
+
+ipc.on('image-remove', (evt, index) => {
+  images.rm(index, _ => {
+    evt.sender.send('image-removed', index)
+  })
+})
