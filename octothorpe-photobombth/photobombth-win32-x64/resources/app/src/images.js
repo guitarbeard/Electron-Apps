@@ -10,7 +10,7 @@ let images = []
 exports.save = (picturesPath, contents, done) => {
   // removes header to save to file
   const base64Data = contents.replace(/^data:image\/png;base64,/, '')
-  const imgPath = path.join(picturesPath, `${new Date()}.png`)
+  const imgPath = path.join(picturesPath, `${new Date().getTime()}.png`)
   fs.writeFile(imgPath, base64Data, { encoding: 'base64'}, err => {
     if(err) return logError(err)
 

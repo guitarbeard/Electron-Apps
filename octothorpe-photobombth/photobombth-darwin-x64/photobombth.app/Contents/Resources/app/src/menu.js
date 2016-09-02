@@ -43,10 +43,20 @@ module.exports = mainWindow => {
           click: _ => mainWindow.webContents.send('effect-choose', 'daltonize')
         },
         {
+          label: 'Filmgrain',
+          type: 'radio',
+          click: _ => mainWindow.webContents.send('effect-choose', 'filmgrain')
+        },
+        {
           label: 'Hex',
           type: 'radio',
           click: _ => mainWindow.webContents.send('effect-choose', 'hex')
-        }
+        },
+        {
+          label: 'Kaleidoscope',
+          type: 'radio',
+          click: _ => mainWindow.webContents.send('effect-choose', 'kaleidoscope')
+        },
       ]
     },
     {

@@ -5,7 +5,7 @@
   "description": "Photobooth app with filters",
   "main": "src/main.js",
   "scripts": {
-    "build": "rimraf photobombth-* && electron-packager . --platform=darwin,win32,linux --arch=x64 --icon=app",
+    "build": "rimraf photobombth-* && electron-packager . --platform=darwin,win32 --arch=x64 --icon=app",
     "start": "electron ."
   },
   "keywords": [],

@@ -18,10 +18,19 @@ const effects = {
     daltonize.type = '0.8'
     connectEffect(seriously, src, target, daltonize)
   },
+  filmgrain: (seriously, src, target) => {
+    const filmgrain = seriously.effect('filmgrain')
+    filmgrain.amount = 0.5;
+    connectEffect(seriously, src, target, filmgrain)
+  },
   hex: (seriously, src, target) => {
     const hex = seriously.effect('hex')
     hex.size = 0.03
     connectEffect(seriously, src, target, hex)
+  },
+  kaleidoscope: (seriously, src, target) => {
+    const kaleidoscope = seriously.effect('kaleidoscope')
+    connectEffect(seriously, src, target, kaleidoscope)
   },
 }
 const effectNames = Object.keys(effects)
